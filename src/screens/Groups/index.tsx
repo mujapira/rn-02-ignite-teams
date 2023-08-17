@@ -1,6 +1,6 @@
 import { Header } from '@components/Header';
 import * as S from './styles';
-import { SectionHeader } from '@screens/SectionHeader';
+import { SectionHeader } from '@components/SectionHeader';
 
 export function Groups() {
   return (
