@@ -1,18 +1,10 @@
-import { StyleSheet, Text, View } from 'react-native';
+import * as S from './styles';
 
 export function Groups() {
   return (
-    <View style={styles.container}>
-      <Text>Grupos</Text>
-    </View>
+    <S.Container>
+      <S.Title>Grupos a</S.Title>
+    </S.Container>    
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
