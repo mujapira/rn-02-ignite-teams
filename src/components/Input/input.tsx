@@ -5,8 +5,9 @@ import { useTheme } from "styled-components/native";
 export function Input({ ...rest }: TextInputProps) {
     const { COLORS } = useTheme();
   return (
-    <Container 
+    <Container
       placeholderTextColor={COLORS.GRAY_300}
+      selectionColor={COLORS.GREEN_700}
       {...rest} 
     />
   )
