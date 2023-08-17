@@ -1,3 +1,4 @@
+import { useNavigation } from "@react-navigation/native";
 import * as S from "./styles";
 
 import logoImg from '@assets/logo.png';
@@ -7,11 +8,18 @@ type Props = {
 }
 
 export function Header({isButtonVisible = false} : Props) {
+  const navigation = useNavigation()
+
+  function handleGoBack() {
+    navigation.navigate('groups')
+  }
+
+
   return (
     <S.Container>
       {
         isButtonVisible && 
-        <S.ButtonWrapper>
+        <S.ButtonWrapper onPress={handleGoBack}>
           <S.Icon />
         </S.ButtonWrapper>
       }
