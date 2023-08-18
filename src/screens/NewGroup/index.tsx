@@ -6,13 +6,29 @@ import { SectionHeader } from "@components/SectionHeader";
 import { Input } from "@components/Input/input";
 import { useNavigation } from "@react-navigation/native";
 import { useState } from "react";
+import { createNewGroup } from "@storage/group/create";
+import { AppError } from "@utils/AppError";
+import { Alert } from "react-native";
 
 export function NewGroup() {
   const [group, setGroup] = useState<string>('')
   const navigation = useNavigation()
 
-  function handleNew() {
-    navigation.navigate('players', { group })
+  async function handleNew() {
+    try {
+      if (group.trim().length === 0) {
+        return Alert.alert('Novo grupo', 'O nome do grupo não pode ser vazio')
+      }
+      await createNewGroup(group)
+      navigation.navigate('players', { group })
+    } catch (error) {
+      if(error instanceof AppError) {
+        Alert.alert('Novo grupo', error.message)
+      } else {
+        Alert.alert('Novo grupo', 'Erro ao criar grupo')
+        console.log(error)
+      }
+    }
   }
   
   return (
