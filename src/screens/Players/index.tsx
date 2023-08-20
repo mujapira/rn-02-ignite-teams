@@ -17,6 +17,7 @@ import { AppError } from "@utils/AppError";
 import { addPlayerInGroup } from "@storage/player/add";
 import { getGroupTeamPlayers } from "@storage/player/getGroupTeamPlayers";
 import { PlayerStorageDTO } from "@storage/player/PlayerStorageDTO";
+import { removePlayer } from "@storage/player/removeFromGroup";
 
 type RouteParams = {
   group: string
@@ -69,6 +70,15 @@ export function Players() {
       console.log(error)
       Alert.alert('Erro ao buscar pessoas', 'Erro ao buscar as pessoas do time selecionado')
     }
+  }
+
+  async function handleRemovePlayer(playerName: string) {
+    try {
+      await removePlayer(playerName, group)
+      fetchTeamPlayers()
+    } catch (error) {
+      Alert.alert('Erro ao remover pessoa', 'Erro ao remover a pessoa selecionada')
+    } 
   }
 
   useEffect(()=> {
@@ -126,7 +136,7 @@ export function Players() {
         renderItem={({ item }) => (
           <PlayerCard 
             name={item.name} 
-            onRemove={() => {}}
+            onRemove={() => handleRemovePlayer(item.name)}
           />
         )}
 
