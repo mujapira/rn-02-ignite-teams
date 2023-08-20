@@ -37,6 +37,7 @@ export function Players() {
   const { group } = route.params as RouteParams
   const newPlayerNameInputRef = useRef<TextInput>(null)
   const navigation =  useNavigation()
+  const [isLoading, setIsLoading] = useState(true)
 
   async function handleAddPlayer(){
     if(newPlayerName.trim().length === 0){
@@ -66,11 +67,14 @@ export function Players() {
 
   async function fetchTeamPlayers(){
     try {
+      setIsLoading(true)
       const teamPlayers = await getGroupTeamPlayers(group, team)
       setPlayers(teamPlayers)
     } catch (error){
       console.log(error)
       Alert.alert('Erro ao buscar pessoas', 'Erro ao buscar as pessoas do time selecionado')
+    } finally {
+      setIsLoading(false)
     }
   }
 

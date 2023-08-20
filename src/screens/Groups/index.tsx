@@ -11,7 +11,7 @@ import { getAllGroups } from '@storage/group/getAll';
 
 export function Groups() {
   const [groups, setGroups] = useState<string[]>([]);
-
+  const [isLoading, setIsLoading] = useState(true)
   const navigation = useNavigation()
 
   function handleNewGroup() {
@@ -20,10 +20,13 @@ export function Groups() {
 
   async function fetchGroups() {
     try {
-     const data = await getAllGroups()
-     setGroups(data)
+      setIsLoading(true)
+      const data = await getAllGroups()
+      setGroups(data)
     } catch (error) {
       console.log(error)
+    } finally {
+      setIsLoading(false)
     }
   }
 
